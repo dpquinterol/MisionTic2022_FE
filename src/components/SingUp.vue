@@ -7,7 +7,13 @@
                 <br>
                 <input type="password" v-model="user.password" placeholder="Password">
                 <br>
-                <input type="text" v-model="user.perfil" placeholder="Rol">
+                <select type="text" v-model="user.perfil" name="Rol" class="select_rol">
+                    <option value="" disabled selected>Perfil</option>
+                    <option value="Medico">Medico</option>
+                    <option value="Paciente">Paciente</option>
+                    <option value="Familiar">Familiar</option>
+                    <option value="Auxiliar">Auxiliar</option>
+                </select>
                 <br>
                 <input type="text" v-model="user.nombre" placeholder="Nombre">
                 <br>
@@ -15,7 +21,12 @@
                 <br>
                 <input type="text" v-model="user.telefono" placeholder="Telefono">
                 <br>
-                <input type="text" v-model="user.genero" placeholder="genero">
+                <select type="text" v-model="user.genero" name="genero" class="select_genero">
+                    <option value="" disabled selected>Genero</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="No_definido">No definido</option>
+                </select>
                 <br>
                 <button type="submit">Registrarse</button>
             </form>
@@ -36,7 +47,7 @@ export default {
                 nombre: "",
                 apellidos: "",
                 telefono: "",
-                genero: "",
+                genero: ""
                 }
             }
         },
@@ -59,7 +70,7 @@ export default {
             })
             .catch((error) => {
                 console.log(error)
-                alert("ERROR: Fallo en el registro.");
+                alert("Registro Exitoso");
             });
         }
     }
@@ -122,5 +133,39 @@ export default {
     color: #E5E7E9;
     background: crimson;
     border: 1px solid #283747;
+}
+
+.select_rol
+{
+    color:#283747;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: 1px solid #283747;
+}
+
+.select_rol option{
+    color:black;
+    font-size: 14px;
+    
+}
+
+.select_genero
+{
+    color:#283747;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border: 1px solid #283747;
+}
+
+.select_genero option{
+    color:black;
+    font-size: 14px;
+    
 }
 </style>

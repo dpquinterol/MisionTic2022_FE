@@ -21,7 +21,7 @@
             return {
             user: {
                 username:"",
-                password:"",
+                password:""
             }
         }
     },

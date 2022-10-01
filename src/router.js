@@ -3,6 +3,8 @@ import App from './App.vue';
 
 import LogIn from './components/LogIn.vue'
 import SignUp from './components/SingUp.vue'
+import Home from './components/Home.vue'
+import RequestUser from './components/RequestUser.vue'
 
 const routes = [
   {
@@ -19,6 +21,16 @@ const routes = [
     path: '/user/signUp',
     name: 'signUp',
     component: SignUp
+  },
+  {
+    path: '/user/Home',
+    name: 'Home',
+    component: Home
+  },    
+  {
+    path: '/user/RequestUser',
+    name: 'RequestUser',
+    component: RequestUser
   }    
 ];
 

@@ -3,17 +3,19 @@
       <div class="header">
           <h1>Hospital en Casa Misión Tic 2022</h1>
           <nav>
-            <button v-if="is_auth">Inicio</button>
-            <button v-if="is_auth">Cuenta</button>
-            <button v-if="is_auth">Cerrar Sesión</button>
             <button v-if="!is_auth" v-on:click="loadLogIn">Iniciar Sesión</button>
             <button v-if="!is_auth" v-on:click="loadSignUp">Registrarse</button>
+            <button v-if="is_auth" v-on:click="loadHome"> Inicio </button>
+            <button v-if="is_auth" v-on:click="loadRequestUser"> Consultar Usuario </button>
+            <button v-if="is_auth" v-on:click="logOut"> Cerrar Sesión </button>
           </nav>
       </div>
       <div class="main-component">
         <router-view
           v-on:completedLogIn="completedLogIn"
-          v-on:completedSignUp="completedSignUp">
+          v-on:completedSignUp="completedSignUp"
+          v-on:logOut="logOut"
+          v-on:loadRequestUser="loadRequestUser">
         </router-view>
       </div>
       <div class="footer">
@@ -33,9 +35,13 @@
     components:{},
 
     methods:{
-      verifyAuth: function(){
+      verifyAuth: function(){        
+        this.is_auth = localStorage.getItem("isAuth") || false;
         if(this.is_auth == false)
-        this.$router.push({name: "logIn"})
+          this.$router.push({name: "logIn"});       
+        else 
+          this.$router.push({ name: "Home" });  
+        
       },
       loadLogIn: function(){
         this.$router.push({name: "logIn"})
@@ -43,8 +49,33 @@
       loadSignUp: function(){
         this.$router.push({name: "signUp"})
       },
-      completedLogIn: function(data) {},
-      completedSignUp: function(data) {},
+      completedLogIn: function(data) {
+        localStorage.setItem('isAuth', true);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("token_access", data.token_access);
+        localStorage.setItem("token_refresh", data.token_refresh);
+        alert("Autenticación Exitosa");
+        this.verifyAuth();
+        },
+      completedSignUp: function(data) {
+        alert("Registro Exitoso");
+        this.completedLogIn(data);
+      },
+      loadHome: function(){
+        this.$router.push({name: "Home"});
+      },
+      logOut: function(){
+        localStorage.clear();
+        alert("Sesion Cerrada");
+        this.verifyAuth();
+      },
+      loadRequestUser: function(){
+        this.$router.push({name:"RequestUser"});
+      }, 
+      completedRequestUser: function(data){
+        alert("Consulta exitosa");
+        this.completedRequestUser(data);
+      },
     },
     created: function(){
       this.verifyAuth()
