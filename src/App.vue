@@ -7,6 +7,12 @@
             <button v-if="!is_auth" v-on:click="loadSignUp">Registrarse</button>
             <button v-if="is_auth" v-on:click="loadHome"> Inicio </button>
             <button v-if="is_auth" v-on:click="loadRequestUser"> Consultar Usuario </button>
+            <button v-if="is_auth" v-on:click="loadDeleteUser"> Eliminar Usuario </button>
+            <button v-if="is_auth" v-on:click="loadPutUser"> Modificar Usuario </button>
+            <button v-if="is_auth" v-on:click="loadPostpsalud"> Registro Personal </button>
+            <button v-if="is_auth" v-on:click="loaddeletepsalud"> Eliminar Personal </button>
+            <button v-if="is_auth" v-on:click="loadgetpsalud"> Consulta Personal </button>
+            <button v-if="is_auth" v-on:click="loadputpsalud"> Modificar Personal </button>
             <button v-if="is_auth" v-on:click="logOut"> Cerrar Sesión </button>
           </nav>
       </div>
@@ -15,7 +21,13 @@
           v-on:completedLogIn="completedLogIn"
           v-on:completedSignUp="completedSignUp"
           v-on:logOut="logOut"
-          v-on:loadRequestUser="loadRequestUser">
+          v-on:loadRequestUser="loadRequestUser"
+          v-on:loadDeleteUser="loadDeleteUser"
+          v-on:loadPutUser="loadPutUser"
+          v-on:loadPostpsalud="loadPostpsalud"
+          v-on:loaddeletepsalud="loaddeletepsalud"
+          v-on:loadgetpsalud="loadgetpsalud"
+          v-on:loadputpsalud="loadputpsalud">
         </router-view>
       </div>
       <div class="footer">
@@ -72,9 +84,27 @@
       loadRequestUser: function(){
         this.$router.push({name:"RequestUser"});
       }, 
+      loadDeleteUser: function(){
+        this.$router.push({name:"DeleteUser"});
+      }, 
+      loadPutUser: function(){
+        this.$router.push({name:"PutUser"});
+      },
       completedRequestUser: function(data){
         alert("Consulta exitosa");
         this.completedRequestUser(data);
+      },
+      loadPostpsalud: function(){
+        this.$router.push({name:"Postpsalud"});
+      },
+      loaddeletepsalud: function(){
+        this.$router.push({name:"deletepsalud"});
+      },
+      loadgetpsalud: function(){
+        this.$router.push({name:"getpsalud"});
+      },
+      loadputpsalud: function(){
+        this.$router.push({name:"putpsalud"});
       },
     },
     created: function(){
